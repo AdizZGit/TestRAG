@@ -20,6 +20,7 @@ def get_pull_requests():
         url,
         headers=headers
     )
+    print(f"GitHub API Response Status Code: {response.status_code}")   
 
     response.raise_for_status()
 
