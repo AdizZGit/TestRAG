@@ -33,10 +33,10 @@ def rerank_results(query, chunks):
     print("\nTop Ranked Results:")
 
     for idx, chunk in enumerate(chunks):
-
+        metadata = chunk.get("metadata", {})
         print(
             f"{idx+1}. "
-            f"{chunk['metadata'].get('source_file')} "
+            f"{metadata.get('source_file', 'Unknown')} "
             f"Score={chunk['rerank_score']}"
         )
 
