@@ -3,3 +3,7 @@ __pycache__
 *.pyc
 .env
 Regression_Report*.pdf
+npm-debug.log
+chroma_db
+uploads
+.git
