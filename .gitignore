@@ -16,10 +16,17 @@ ENV/
 # IDE
 .vscode/
 .idea/
-*.swp``
+*.swp
 *.swo
 
 # Project specific
 chroma_db/
 uploads/
 *.sqlite3
+
+# Frontend
+node_modules/
+.next/
+
+# Logs
+*.log
