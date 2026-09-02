@@ -3,8 +3,18 @@ FROM python:3.12-slim
 WORKDIR /app
 
 COPY requirements.txt .
+COPY constraints.txt .
 
-RUN pip install --no-cache-dir -r requirements.txt
+# Install CPU-only PyTorch
+RUN pip install --no-cache-dir \
+    torch==2.8.0 \
+    torchvision==0.23.0 \
+    --index-url https://download.pytorch.org/whl/cpu
+
+# Install application dependencies
+RUN pip install --no-cache-dir \
+    -c constraints.txt \
+    -r requirements.txt
 
 COPY . .
 

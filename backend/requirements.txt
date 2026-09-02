@@ -2,20 +2,14 @@ fastapi
 uvicorn
 sqlalchemy
 psycopg2-binary
-
 python-dotenv
 python-multipart
 
 chromadb
-
 sentence-transformers
-
 langchain-text-splitters
 
 docling
-
 groq
-
 requests
-
 reportlab
