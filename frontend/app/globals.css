@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #030712;
+  color: #f8fafc;
+  font-family: Inter, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(96, 165, 250, 0.35);
+  color: white;
+}
+
+/* Grid Background */
+.hero-grid {
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Radial mask so grid fades at edges instead of hard-cutting */
+.hero-grid-masked {
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 40%, transparent 100%);
+}
+
+/* Grain overlay */
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  opacity: 0.06;
+}
+
+/* Glass Effect */
+.glass {
+  background: rgba(255,255,255,.04);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+/* Mouse Glow */
+.hero-glow {
+  animation: glowPulse 8s ease-in-out infinite;
+}
+
+.hero-glow-secondary {
+  animation: glowPulse 10s ease-in-out infinite reverse;
+}
+
+@keyframes glowPulse {
+  0% {
+    opacity: .15;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  50% {
+    opacity: .22;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+
+  100% {
+    opacity: .15;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fadeUp .8s ease forwards;
+}
+
+/* Badge ring pulse */
+.badge-dot {
+  position: relative;
+}
+.badge-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  border: 1px solid rgba(96, 165, 250, 0.5);
+  animation: ringPulse 2s ease-out infinite;
+}
+@keyframes ringPulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+@keyframes flow {
+
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+
+}
+
+.pipeline-line::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+
+  top:0;
+
+  width:100%;
+
+  height:120px;
+
+  background:linear-gradient(
+      to bottom,
+      transparent,
+      #3b82f6,
+      transparent
+  );
+
+  animation:flow 2.5s linear infinite;
+
+}
+@keyframes pipelineFlow {
+  from {
+    transform: translateY(-120px);
+  }
+
+  to {
+    transform: translateY(900px);
+  }
+}
+
+.animate-pipeline-flow {
+  animation: pipelineFlow 6s linear infinite;
+}
