@@ -21,6 +21,8 @@ app.add_middleware(
         "http://127.0.0.1:3000",
         "https://test-rag-11.vercel.app",
         "https://test-rag-11-9kbauvzmz-aditya-r.vercel.app",
+        # Current Vercel production domain
+        "https://test-rag-nu.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
