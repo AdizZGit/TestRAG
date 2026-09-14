@@ -103,7 +103,7 @@ export default function ImpactReport({
   return (
     <section
       id="report"
-      className="mx-auto max-w-7xl px-6 py-28"
+      className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:py-28"
     >
       {/* Header */}
 
@@ -115,7 +115,7 @@ export default function ImpactReport({
             Step 04
           </p>
 
-          <h1 className="mt-3 text-4xl font-bold text-white">
+          <h1 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
             Regression Impact Report
           </h1>
 
@@ -137,6 +137,8 @@ export default function ImpactReport({
     text-blue-400 
     transition 
     hover:bg-blue-500/20
+    w-full
+    md:w-auto
   "
         >
           Download Report

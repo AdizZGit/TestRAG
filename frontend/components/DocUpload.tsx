@@ -68,20 +68,20 @@ export default function DocUpload() {
 
   return (
     <>
-      <section id="knowledge" className="mx-auto max-w-7xl px-6 py-28">
+      <section id="knowledge" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:py-28">
 
         {/* Header */}
 
-        <div className="mx-auto mb-16 max-w-3xl text-center">
+        <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
           <p className="text-sm font-medium uppercase tracking-[0.35em] text-blue-400">
             Step 01
           </p>
 
-          <h2 className="mt-4 text-4xl font-bold text-white">
+          <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
             Build Your Knowledge Base
           </h2>
 
-          <p className="mt-6 leading-8 text-slate-400">
+          <p className="mt-6 text-base leading-8 text-slate-400 sm:text-lg">
             Upload project documentation that will be indexed and used by the
             Retrieval Engine during analysis.
           </p>
@@ -108,7 +108,7 @@ export default function DocUpload() {
                 setDragging(false);
                 addFiles(e.dataTransfer.files);
               }}
-              className={`flex h-full flex-col justify-center rounded-3xl border-2 border-dashed p-10 text-center transition-all duration-300 ${dragging
+              className={`flex h-full flex-col justify-center rounded-3xl border-2 border-dashed p-6 text-center transition-all duration-300 sm:p-8 lg:p-10 ${dragging
                 ? "border-blue-500 bg-blue-500/5"
                 : "border-slate-700 bg-slate-900/40"
                 }`}

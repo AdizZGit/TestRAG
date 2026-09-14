@@ -55,7 +55,7 @@ export default function Hero() {
 
       {/* Content */}
 
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center px-6  text-center">
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center px-4 text-center sm:px-6">
 
         {/* Badge */}
 
@@ -71,7 +71,7 @@ export default function Hero() {
 
         {/* Heading */}
 
-        <h1 className="max-w-4xl text-4xl leading-tight tracking-[-0.02em] text-white sm:text-5xl lg:text-6xl">
+        <h1 className="max-w-4xl text-3xl leading-tight tracking-[-0.02em] text-white sm:text-5xl lg:text-6xl">
           <span
             className="fade-up inline-block font-bold"
             style={{ animationDelay: "0.15s", opacity: 0 }}
@@ -100,10 +100,19 @@ export default function Hero() {
         {/* Buttons */}
 
         <div
-          className="fade-up mt-12 flex flex-col gap-4 sm:flex-row sm:justify-center"
+          className="fade-up mt-12 flex w-full max-w-md flex-col gap-4 sm:max-w-none sm:flex-row sm:justify-center"
           style={{ animationDelay: "0.6s", opacity: 0 }}
         >
-          <button className="group flex items-center justify-center gap-2 rounded-lg bg-blue-200 px-8 py-4 font-medium text-slate-900 shadow-[0_0_20px_rgba(147,197,253,0.7)] transition-all hover:scale-[1.02] hover:brightness-105">
+          <button
+            type="button"
+            onClick={() =>
+              document.getElementById("knowledge")?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              })
+            }
+            className="group flex w-full items-center justify-center gap-2 rounded-lg bg-blue-200 px-6 py-4 font-medium text-slate-900 shadow-[0_0_20px_rgba(147,197,253,0.7)] transition-all hover:scale-[1.02] hover:brightness-105 sm:w-auto sm:px-8"
+          >
             Explore Workflow
             <ArrowRight
               size={18}
@@ -111,9 +120,14 @@ export default function Hero() {
             />
           </button>
 
-          <button className="flex items-center justify-center rounded-lg border border-white/10 px-8 py-4 font-medium text-slate-200 transition-all hover:scale-[1.02] hover:bg-white/5">
+          <a
+            href="https://github.com/AdizZGit/TestRAG"
+            target="_blank"
+            rel="noreferrer"
+            className="flex w-full items-center justify-center rounded-lg border border-white/10 px-6 py-4 font-medium text-slate-200 transition-all hover:scale-[1.02] hover:bg-white/5 sm:w-auto sm:px-8"
+          >
             View Source
-          </button>
+          </a>
         </div>
         {/* Product mockup */}
 

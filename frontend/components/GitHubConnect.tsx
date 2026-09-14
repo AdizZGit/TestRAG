@@ -136,23 +136,23 @@ if (!repository) return;
   return (
     <section
       id="github"
-      className="mx-auto max-w-6xl px-6 py-28"
+      className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:py-28"
     >
       <div className="mx-auto max-w-3xl text-center">
         <p className="text-sm font-medium uppercase tracking-[0.35em] text-blue-400">
           Step 02
         </p>
 
-        <h2 className="mt-4 text-4xl font-bold text-white">
+        <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
           Connect GitHub Repository
         </h2>
 
-        <p className="mt-6 leading-8 text-slate-400">
+        <p className="mt-6 text-base leading-8 text-slate-400 sm:text-lg">
           Connect your GitHub account and choose a Pull Request to analyze.
         </p>
       </div>
 
-      <div className="mt-14 rounded-3xl border border-slate-800 bg-slate-900/40 p-10 backdrop-blur-xl">
+      <div className="mt-14 rounded-3xl border border-slate-800 bg-slate-900/40 p-5 backdrop-blur-xl sm:p-8 lg:p-10">
         {!connected ? (
           <>
             <div className="flex items-center gap-4">

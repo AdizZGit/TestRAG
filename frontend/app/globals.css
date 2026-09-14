@@ -4,6 +4,10 @@ html {
   scroll-behavior: smooth;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 body {
   background: #030712;
   color: #f8fafc;

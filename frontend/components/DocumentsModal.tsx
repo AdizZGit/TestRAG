@@ -40,7 +40,7 @@ export default function DocumentsModal({
 
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-3xl rounded-3xl border border-slate-800 bg-slate-950 p-8"
+        className="w-[calc(100%-1.5rem)] max-w-3xl rounded-3xl border border-slate-800 bg-slate-950 p-5 sm:p-8"
       >
 
         <div className="flex items-center justify-between">

@@ -96,7 +96,7 @@ export default function Pipeline({ onCompleted }: Props) {
   return (
     <section
       id="pipeline"
-      className="mx-auto max-w-6xl px-6 py-28"
+      className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:py-28"
     >
       {/* Heading */}
 
@@ -105,11 +105,11 @@ export default function Pipeline({ onCompleted }: Props) {
           Step 03
         </p>
 
-        <h2 className="mt-4 text-4xl font-bold text-white">
+        <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
           AI Analysis Pipeline
         </h2>
 
-        <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-400">
+        <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-slate-400 sm:text-lg">
           Your Pull Request is now being processed through multiple AI
           reasoning stages.
         </p>
@@ -117,12 +117,12 @@ export default function Pipeline({ onCompleted }: Props) {
 
       {/* Timeline */}
 
-      <div className="relative mx-auto mt-24 max-w-4xl">
-        <div className="absolute left-8 top-0 bottom-0 w-px overflow-hidden bg-slate-800">
+      <div className="relative mx-auto mt-16 max-w-4xl sm:mt-20 lg:mt-24">
+        <div className="absolute left-4 top-0 bottom-0 w-px overflow-hidden bg-slate-800 sm:left-8">
           <div className="animate-pipeline-flow absolute left-0 h-24 w-full bg-gradient-to-b from-transparent via-blue-400 to-transparent opacity-80" />
         </div>
 
-        <div className="space-y-10">
+        <div className="space-y-6 sm:space-y-10">
           {pipeline.map((item, index) => {
             const Icon = item.icon;
 
@@ -145,15 +145,18 @@ export default function Pipeline({ onCompleted }: Props) {
                 <div
                   className={`
                     absolute
-                    left-8
+                    left-4
                     z-20
-                    h-5
-                    w-5
+                    h-4
+                    w-4
                     -translate-x-1/2
                     rounded-full
                     border-4
                     transition-all
                     duration-500
+                    sm:left-8
+                    sm:h-5
+                    sm:w-5
 
                     ${isActive
                       ? "border-white bg-blue-400 shadow-[0_0_18px_rgba(59,130,246,.9)]"
@@ -168,12 +171,13 @@ export default function Pipeline({ onCompleted }: Props) {
 
                 <div
                   className={`
-                    ml-20
+                    ml-10
                     w-full
                     rounded-2xl
                     border
                     transition-all
                     duration-700
+                    sm:ml-20
 
                     ${isActive
                       ? "border-blue-400 bg-slate-900 shadow-[0_0_35px_rgba(59,130,246,.25)]"
@@ -185,12 +189,13 @@ export default function Pipeline({ onCompleted }: Props) {
                     }
                   `}
                 >
-                  <div className="flex items-center gap-6 p-6">
+                  <div className="flex items-center gap-4 p-4 sm:gap-6 sm:p-6">
                     <div
                       className={`
                         rounded-2xl
-                        p-4
+                        p-3
                         transition-all
+                        sm:p-4
 
                         ${isActive
                           ? "bg-blue-500/20 text-blue-300 shadow-[0_0_20px_rgba(59,130,246,.45)]"
@@ -206,11 +211,11 @@ export default function Pipeline({ onCompleted }: Props) {
                     </div>
 
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-white">
+                      <h3 className="text-base font-semibold text-white sm:text-xl">
                         {item.title}
                       </h3>
 
-                      <p className="mt-2 text-slate-400">
+                      <p className="mt-2 text-sm text-slate-400 sm:text-base">
                         {item.subtitle}
                       </p>
                     </div>
