@@ -2,7 +2,6 @@
 
 import {
   BrainCircuit,
-  Quote,
   CheckCircle2,
   AlertCircle,
 } from "lucide-react";
@@ -19,19 +18,18 @@ export default function ReasoningPanel({
 
 
   return (
-    <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
-
-
-      <div className="mb-6 flex items-center gap-3">
+    <div className="mt-6 rounded-xl border border-slate-800 bg-slate-900/70 p-5 sm:p-6">
+      <div className="mb-5 flex items-center gap-3">
 
         <BrainCircuit
           size={22}
           className="text-blue-400"
         />
 
-        <h3 className="text-xl font-semibold text-white">
-          AI Decision Summary
-        </h3>
+        <div>
+          <h3 className="text-lg font-semibold text-white">AI Analysis &amp; Decision</h3>
+          <p className="mt-1 text-xs text-slate-500">Model reasoning behind the regression assessment</p>
+        </div>
 
       </div>
 
@@ -40,36 +38,9 @@ export default function ReasoningPanel({
       {/* Risk Reason */}
 
 
-      <div className="
-        rounded-xl
-        border
-        border-blue-500/20
-        bg-blue-500/5
-        p-5
-      ">
-
-
-        <div className="flex gap-4">
-
-
-          <Quote
-            className="mt-1 text-blue-400"
-            size={20}
-          />
-
-
-          <p className="leading-8 text-slate-300">
-
-            {decision?.risk_reason ??
-              "No decision summary available."}
-
-          </p>
-
-
-        </div>
-
-
-      </div>
+      <p className="max-w-4xl rounded-lg border border-blue-500/20 bg-blue-500/5 p-5 text-base leading-7 text-slate-200 sm:p-6 sm:text-[17px] sm:leading-8">
+        {decision?.risk_reason ?? "No decision summary available."}
+      </p>
 
 
 
@@ -78,9 +49,9 @@ export default function ReasoningPanel({
       {/* Testing Strategy */}
 
 
-      <div className="mt-6">
+      <div className="mt-8">
 
-        <h4 className="mb-3 font-medium text-white">
+        <h4 className="mb-3 text-sm font-semibold text-slate-200">
           Testing Strategy
         </h4>
 
@@ -98,7 +69,7 @@ export default function ReasoningPanel({
                   flex
                   items-center
                   gap-2
-                  rounded-full
+                  rounded-md
                   bg-green-500/10
                   px-4
                   py-2
@@ -126,13 +97,12 @@ export default function ReasoningPanel({
       {/* Coverage Gaps */}
 
 
-      {
-        decision?.coverage_gaps?.length > 0 && (
+        {decision?.coverage_gaps?.length > 0 && (
 
-          <div className="mt-6">
+          <div className="mt-8">
 
 
-            <h4 className="mb-3 font-medium text-white">
+            <h4 className="mb-3 text-sm font-semibold text-slate-200">
 
               Coverage Gaps
 
@@ -177,55 +147,6 @@ export default function ReasoningPanel({
 
 
 
-
-
-      {/* Report Focus */}
-
-
-      <div className="mt-6">
-
-
-        <h4 className="mb-3 font-medium text-white">
-
-          Report Focus
-
-        </h4>
-
-
-
-        <div className="flex flex-wrap gap-2">
-
-
-          {
-            decision?.report_focus?.map(
-              (focus:string)=>(
-                
-                <span
-                  key={focus}
-                  className="
-                  rounded-full
-                  border
-                  border-blue-500/30
-                  px-3
-                  py-1
-                  text-xs
-                  text-blue-400
-                  "
-                >
-
-                  {focus}
-
-                </span>
-
-              )
-            )
-          }
-
-
-        </div>
-
-
-      </div>
 
 
     </div>

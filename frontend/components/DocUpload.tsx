@@ -37,8 +37,11 @@ export default function DocUpload() {
     } catch (error: any) {
       if (error.response?.status === 409) {
         alert(error.response.data.detail);
+      } else if (error.code === "ECONNABORTED") {
+        console.error("[Documents] Upload timed out", error);
+        alert("The upload is still processing. Please wait and refresh the document list.");
       } else {
-        console.error(error);
+        console.error("[Documents] Upload failed", error);
       }
     } finally {
       setUploading(false);

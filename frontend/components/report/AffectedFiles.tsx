@@ -2,8 +2,6 @@
 
 import {
   FileCode2,
-  ChevronRight,
-  AlertTriangle,
   ChevronDown,
 } from "lucide-react";
 
@@ -20,15 +18,13 @@ export default function AffectedFiles({
 }: Props) {
   const [expanded, setExpanded] = useState<string | null>(null);
   return (
-    <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
-      <div className="mb-6 flex items-center justify-between">
-        <h3 className="text-xl font-semibold text-white">
-          Affected Files
-        </h3>
-        <AlertTriangle
-          className="text-red-400"
-          size={22}
-        />
+    <div className="rounded-xl border border-slate-800 bg-slate-900/70 p-5 sm:p-6">
+      <div className="mb-5 flex items-center justify-between">
+        <div>
+          <h3 className="text-lg font-semibold text-white">Affected Files</h3>
+          <p className="mt-1 text-xs text-slate-500">Changed paths in this pull request</p>
+        </div>
+        <span className="text-xs font-medium text-slate-500">{files.length} files</span>
       </div>
       <div className="space-y-4">
         {files.map((item:any)=>{
@@ -37,13 +33,7 @@ export default function AffectedFiles({
           return (
             <div
               key={item.filename}
-              className="
-              rounded-xl
-              border
-              border-slate-800
-              bg-slate-950/60
-              overflow-hidden
-              "
+              className="overflow-hidden rounded-lg border border-slate-800 bg-slate-950/50"
             >
               {/* Header */}
               <button
@@ -54,27 +44,17 @@ export default function AffectedFiles({
                     : item.filename
                   )
                 }
-                className="
-                flex
-                w-full
-                items-center
-                justify-between
-                p-4
-                hover:bg-slate-900
-                "
+                className="flex w-full items-center justify-between gap-3 p-3.5 text-left hover:bg-slate-900"
               >
                 <div className="flex items-center gap-4">
-                  <div className="rounded-lg bg-blue-500/10 p-3">
-                    <FileCode2
-                      className="text-blue-400"
-                      size={20}
-                    />
+                  <div className="rounded-md bg-blue-500/10 p-2">
+                    <FileCode2 className="text-blue-400" size={17} />
                   </div>
                   <div className="text-left">
-                    <p className="font-medium text-slate-200">
+                    <p className="break-all text-sm font-medium text-slate-200">
                       {item.filename}
                     </p>
-                    <p className="mt-1 text-sm text-slate-500">
+                    <p className="mt-1 text-xs text-slate-500">
                       {item.status}
                       {" • "}
                       <span className="text-green-400">
@@ -92,19 +72,7 @@ export default function AffectedFiles({
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span
-                    className="
-                    rounded-full
-                    border
-                    border-blue-500/40
-                    px-3
-                    py-1
-                    text-xs
-                    text-blue-400
-                    "
-                  >
-                    {item.changes} Changes
-                  </span>
+                  <span className="hidden rounded-full border border-blue-500/30 px-2.5 py-1 text-[11px] text-blue-400 sm:inline-flex">{item.changes} changes</span>
                   <ChevronDown
                       size={18}
                       className="text-blue-400"
@@ -116,12 +84,7 @@ export default function AffectedFiles({
               {
                 isOpen && item.patch && (
                   <div
-                    className="
-                    border-t
-                    border-slate-800
-                    bg-black/40
-                    p-5
-                    "
+                    className="border-t border-slate-800 bg-black/40 p-4"
                   >
                     <p className="
                     mb-3
@@ -137,7 +100,7 @@ export default function AffectedFiles({
                       rounded-lg
                       bg-slate-950
                       p-4
-                      text-sm
+                      text-xs
                       leading-6
                       text-slate-300
                       "

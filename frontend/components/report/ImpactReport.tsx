@@ -27,11 +27,7 @@ export default function ImpactReport({
 
     const stored = sessionStorage.getItem("analysisResult");
 
-    console.log("Stored:", stored);
-
-
     if (!stored || stored === "undefined") {
-      console.log("No report found");
       return;
     }
 
@@ -40,13 +36,11 @@ export default function ImpactReport({
 
       const parsed = JSON.parse(stored);
 
-      console.log("Parsed Report:", parsed);
-
       setReport(parsed);
 
     } catch (err) {
 
-      console.error("Invalid JSON:", err);
+      console.error("Invalid analysis report JSON:", err);
 
     }
 
@@ -54,7 +48,6 @@ export default function ImpactReport({
   }, [pipelineCompleted]);
 
   if (!report) return null;
-  console.log(report);
   const handleDownloadReport = async () => {
 
     try {
@@ -103,74 +96,38 @@ export default function ImpactReport({
   return (
     <section
       id="report"
-      className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:py-28"
+      className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24"
     >
-      {/* Header */}
-
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-
+      <div className="flex flex-col gap-6 border-b border-slate-800/80 pb-8 md:flex-row md:items-end md:justify-between">
         <div>
-
-          <p className="text-sm uppercase tracking-[0.35em] text-blue-400">
-            Step 04
-          </p>
-
-          <h1 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
+          <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-blue-400">
+            <span className="h-2 w-2 rounded-full bg-blue-400" />
+            Regression analysis
+          </div>
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             Regression Impact Report
           </h1>
-
-          <p className="mt-3 text-slate-400">
-            PR #{report.pr_number}
-          </p>
-
+          <p className="mt-2 text-sm text-slate-400">Pull request #{report.pr_number} <span className="mx-2 text-slate-700">/</span> analyzed just now</p>
         </div>
-
         <button
           onClick={handleDownloadReport}
-          className="
-    rounded-xl 
-    border 
-    border-blue-500/30 
-    bg-blue-500/10 
-    px-6 
-    py-3 
-    text-blue-400 
-    transition 
-    hover:bg-blue-500/20
-    w-full
-    md:w-auto
-  "
+          className="flex w-full items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900 px-4 py-2.5 text-sm font-medium text-slate-200 transition hover:border-blue-400/60 hover:bg-slate-800 md:w-auto"
         >
+          <span aria-hidden="true">↓</span>
           Download Report
         </button>
-
       </div>
 
       <ExecutiveSummary report={report} />
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-2">
-
-        <AffectedFiles
-          files={report.files}
-        />
-
-        <RetrievedDocs
-          docs={report.retrieved_documents}
-        />
-
+      <div className="mt-8 grid gap-6 lg:grid-cols-2">
+        <AffectedFiles files={report.files ?? []} />
+        <TestCases report={report} />
       </div>
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-2">
+      <ReasoningPanel decision={report.agent_decision} />
 
-        <TestCases
-          report={report}
-        />
-
-        <ReasoningPanel
-  decision={report.agent_decision}
-/>
-
-      </div>
+      <RetrievedDocs docs={report.retrieved_documents ?? []} />
 
     </section>
   );

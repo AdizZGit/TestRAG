@@ -2,9 +2,8 @@
 
 import {
   FileText,
-  ExternalLink,
   ChevronDown,
-  ChevronRight,
+  Layers3,
 } from "lucide-react";
 
 import { useState } from "react";
@@ -18,152 +17,76 @@ type Props = {
 export default function RetrievedDocs({
   docs,
 }: Props) {
-  const [expanded, setExpanded] = useState<number | null>(null);
+  const [expanded, setExpanded] = useState<string | null>(null);
+  const groupedDocs = docs.reduce((groups: Map<string, any[]>, doc: any) => {
+    const source = doc.metadata?.source_file ?? "Unknown Document";
+    const sourceDocs = groups.get(source) ?? [];
+    sourceDocs.push(doc);
+    groups.set(source, sourceDocs);
+    return groups;
+  }, new Map<string, any[]>());
+  const evidenceGroups = Array.from(groupedDocs.entries()).map(([source, chunks]) => ({
+    source,
+    chunks,
+    bestScore: Math.max(...chunks.map((chunk) => chunk.score ?? 0)),
+    description: chunks[0]?.metadata?.description ?? chunks[0]?.content ?? "Retrieved context supporting the analysis",
+  }));
+
   return (
-    <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
-      <div className="mb-6 flex items-center justify-between">
-        <h3 className="text-xl font-semibold text-white">
-          Retrieved Documents
-        </h3>
-        <FileText
-          className="text-blue-400"
-          size={22}
-        />
+    <div className="mt-6 rounded-xl border border-slate-800 bg-slate-900/70 p-5 sm:p-6">
+      <div className="mb-5 flex items-center justify-between">
+        <div>
+          <h3 className="text-lg font-semibold text-white">Evidence Used</h3>
+          <p className="mt-1 text-xs text-slate-500">Retrieved context supporting the analysis</p>
+        </div>
+        <div className="flex items-center gap-2 text-xs font-medium text-slate-500">
+          <span>{docs.length} chunks</span>
+          <span className="text-slate-700">·</span>
+          <span>{evidenceGroups.length} documents</span>
+          <FileText className="ml-1 text-blue-400" size={20} />
+        </div>
       </div>
-      <div className="space-y-4">
-
-
-        {docs.length === 0 ? (
-
-          <p className="text-slate-400">
-            No documents retrieved.
-          </p>
+      <div className="space-y-2.5">
+        {evidenceGroups.length === 0 ? (
+          <p className="text-sm text-slate-400">No documents retrieved.</p>
         ) : (
-          docs.map((doc:any,index:number)=>{
-            const isOpen =
-              expanded === index;
+          evidenceGroups.map((group) => {
+            const isOpen = expanded === group.source;
             return (
               <div
-                key={index}
-                className="
-                overflow-hidden
-                rounded-xl
-                border
-                border-slate-800
-                bg-slate-950/60
-                "
+                key={group.source}
+                className="overflow-hidden rounded-lg border border-slate-800 bg-slate-950/50"
               >
-                {/* Header */}
                 <button
-
-                  onClick={()=> 
-                    setExpanded(
-                      isOpen
-                      ? null
-                      : index
-                    )
-                  }
-                  className="
-                  flex
-                  w-full
-                  items-center
-                  justify-between
-                  p-4
-                  text-left
-                  hover:bg-slate-900
-                "
+                  onClick={() => setExpanded(isOpen ? null : group.source)}
+                  className="flex w-full items-center justify-between gap-4 p-3.5 text-left hover:bg-slate-900"
                 >
-                  <div>
+                  <div className="min-w-0">
                     <div className="flex items-center gap-3">
-                      <p className="font-medium text-slate-200">
-                        {doc.metadata?.source_file ??
-                          "Unknown Document"}
-                      </p>
-                      <span
-                        className="
-                        rounded-full
-                        bg-blue-500/10
-                        px-3
-                        py-1
-                        text-xs
-                        font-semibold
-                        text-blue-400
-                        "
-                      >
-                        {(doc.score * 100).toFixed(1)}%
-
+                      <p className="break-all text-sm font-medium text-slate-200">{group.source}</p>
+                      <span className="shrink-0 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-semibold text-emerald-400">
+                        {group.chunks.length} {group.chunks.length === 1 ? "chunk" : "chunks"}
                       </span>
+                      <span className="shrink-0 text-xs font-semibold text-emerald-400">{(group.bestScore * 100).toFixed(0)}%</span>
                     </div>
-                    <p className="mt-1 text-sm text-slate-500">
-
-                      Chunk {doc.metadata?.chunk_index ?? "-"}
-
-                    </p>
-
-
-                    {!isOpen && (
-
-                      <p
-                        className="
-                        mt-2
-                        line-clamp-2
-                        text-xs
-                        text-slate-400
-                        "
-                      >
-
-                        {doc.content}
-
-                      </p>
-
-                    )}
+                    <p className="mt-1 line-clamp-1 text-xs text-slate-500">{group.description}</p>
                   </div>
-                  <div className="flex items-center gap-3">          
-                      <ChevronDown
-                        size={18}
-                        className="text-blue-400"
-                      />
-                  </div>
+                  <ChevronDown size={17} className={`shrink-0 text-slate-500 transition-transform ${isOpen ? "rotate-180" : ""}`} />
                 </button>
 
-                {/* Full Document Content */}
-                {
-                  isOpen && (
-
-                    <div
-                      className="
-                      border-t
-                      border-slate-800
-                      bg-black/30
-                      p-5
-                      "
-                    >
-                      <p className="
-                      mb-3
-                      text-sm
-                      font-semibold
-                      text-white
-                      ">
-                        Document Content
-                      </p>
-                      <pre
-                        className="
-                        max-h-96
-                        overflow-auto
-                        whitespace-pre-wrap
-                        rounded-lg
-                        bg-slate-950
-                        p-4
-                        text-sm
-                        leading-6
-                        text-slate-300
-                        "
-                      >
-                        {doc.content}
-                      </pre>
-                    </div>
-                  )
-                }
+                {isOpen && (
+                  <div className="space-y-2 border-t border-slate-800 bg-black/30 p-3">
+                    {group.chunks.map((doc: any, index: number) => (
+                      <details key={`${group.source}-${index}`} className="group rounded-md border border-slate-800/80 bg-slate-950/70">
+                        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-3 py-2.5 text-xs text-slate-300 [&::-webkit-details-marker]:hidden">
+                          <span className="flex items-center gap-2"><Layers3 size={14} className="text-slate-500" />Chunk {doc.metadata?.chunk_index ?? index + 1}</span>
+                          <span className="font-semibold text-emerald-400">{((doc.score ?? 0) * 100).toFixed(0)}%</span>
+                        </summary>
+                        <pre className="max-h-72 overflow-auto whitespace-pre-wrap border-t border-slate-800 px-3 py-3 text-xs leading-5 text-slate-400">{doc.content}</pre>
+                      </details>
+                    ))}
+                  </div>
+                )}
               </div>
             );
           })

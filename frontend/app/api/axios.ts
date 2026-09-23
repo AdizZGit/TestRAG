@@ -74,12 +74,15 @@ export async function axiosDelete<T>(
 
 export const axiosUpload = async <T>(
   url: string,
-  data: FormData
+  data: FormData,
+  config?: AxiosRequestConfig
 ): Promise<T> => {
   const response = await api.post<T>(url, data, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
+    timeout: 300000,
+    ...config,
   });
 
   return response.data;

@@ -1,8 +1,6 @@
 "use client";
 
-import {
-  TestTube2,
-} from "lucide-react";
+import { Check, FlaskConical } from "lucide-react";
 
 type Props = {
   report: any;
@@ -16,26 +14,18 @@ export default function TestCases({
     report?.agent_decision?.priority_test_cases ?? [];
 
   return (
-    <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
-
-      <div className="mb-6 flex items-center justify-between">
-
-        <h3 className="text-xl font-semibold text-white">
-          Recommended Test Cases
-        </h3>
-
-        <TestTube2
-          size={22}
-          className="text-blue-400"
-        />
-
+    <div className="rounded-xl border border-slate-800 bg-slate-900/70 p-5 sm:p-6">
+      <div className="mb-5 flex items-center justify-between">
+        <div>
+          <h3 className="text-lg font-semibold text-white">Recommended Test Cases</h3>
+          <p className="mt-1 text-xs text-slate-500">Prioritized checks for the changed surface</p>
+        </div>
+        <FlaskConical size={19} className="text-amber-400" />
       </div>
-
-      <div className="space-y-4">
-
+      <div className="space-y-2.5">
         {tests.length === 0 ? (
 
-          <p className="text-slate-400">
+            <p className="text-sm text-slate-400">
             No recommended test cases.
           </p>
 
@@ -45,24 +35,12 @@ export default function TestCases({
 
             <div
               key={index}
-              className="rounded-xl border border-slate-800 bg-slate-950/60 p-5 transition hover:border-blue-500/30"
+              className="flex items-center gap-3 rounded-lg border border-slate-800 bg-slate-950/50 p-3.5 transition hover:border-slate-600"
             >
 
-              <div className="flex items-center justify-between">
-
-                <span className="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-semibold uppercase text-blue-400">
-                  Priority {index + 1}
-                </span>
-
-                <span className="text-sm text-slate-500">
-                  Existing Test Case
-                </span>
-
-              </div>
-
-              <h4 className="mt-4 text-lg font-medium text-white">
-                {test}
-              </h4>
+              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-amber-500/10 text-xs font-semibold text-amber-400">{index + 1}</div>
+              <h4 className="min-w-0 flex-1 text-sm font-medium text-slate-200">{test}</h4>
+              <Check size={16} className="shrink-0 text-emerald-400" />
 
             </div>
 

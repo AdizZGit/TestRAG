@@ -8,6 +8,7 @@ import DocUpload from "@/components/DocUpload";
 import GitHubConnect from "@/components/GitHubConnect";
 import Pipeline from "@/components/Pipeline";
 import ImpactReport from "@/components/report/ImpactReport";
+import Footer from "@/components/Footer";
 
 const NOTICE_KEY = "regressai-first-visit-notice";
 
@@ -100,6 +101,8 @@ export default function Home() {
       )}
 
       <ImpactReport pipelineCompleted={pipelineCompleted} />
+
+      {pipelineCompleted && <Footer />}
     </main>
   );
 }

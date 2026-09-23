@@ -19,13 +19,25 @@ export const uploadDocument = async (
 ) => {
   const formData = new FormData();
 
+  console.log("[Documents] Upload started", {
+    filename: file.name,
+    size: file.size,
+  });
+
   formData.append("file", file);
   formData.append("category", category);
 
-  return axiosUpload<UploadResponse>(
+  const response = await axiosUpload<UploadResponse>(
     "/upload",
     formData
   );
+
+  console.log("[Documents] Upload completed", {
+    filename: response.filename,
+    documentId: response.document_id,
+  });
+
+  return response;
 };
 
 export const getDocuments = async () => {

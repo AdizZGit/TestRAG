@@ -2,9 +2,9 @@
 
 import {
   ShieldAlert,
-  BrainCircuit,
   FolderGit2,
   Files,
+  FlaskConical,
 } from "lucide-react";
 
 type Props = {
@@ -25,15 +25,6 @@ export default function ExecutiveSummary({
       border: "border-red-500/20",
     },
     {
-      title: "Testing Strategy",
-      value: report.agent_decision?.testing_strategy ?? [],
-      subtitle: "QA Agent Decision",
-      icon: BrainCircuit,
-      color: "text-blue-400",
-      bg: "bg-blue-500/10",
-      border: "border-blue-500/20",
-    },
-    {
       title: "Affected Files",
       value: report.total_files_changed,
       subtitle: `${report.total_changes} total changes`,
@@ -43,13 +34,22 @@ export default function ExecutiveSummary({
       border: "border-orange-500/20",
     },
     {
-      title: "Retrieved Docs",
+      title: "Evidence Used",
       value: report.retrieved_documents?.length ?? 0,
-      subtitle: "RAG Context",
+      subtitle: "Retrieved RAG context",
       icon: Files,
       color: "text-emerald-400",
       bg: "bg-emerald-500/10",
       border: "border-emerald-500/20",
+    },
+    {
+      title: "Recommended Tests",
+      value: report.agent_decision?.priority_test_cases?.length ?? 0,
+      subtitle: "Suggested regression coverage",
+      icon: FlaskConical,
+      color: "text-amber-400",
+      bg: "bg-amber-500/10",
+      border: "border-amber-500/20",
     },
   ];
 
@@ -57,12 +57,10 @@ export default function ExecutiveSummary({
     <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
       {cards.map((card) => {
         const Icon = card.icon;
-        const isArray = Array.isArray(card.value);
-
         return (
           <div
             key={card.title}
-            className={`rounded-2xl border ${card.border} bg-slate-900/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500/40`}
+            className={`rounded-xl border ${card.border} bg-slate-900/70 p-5 transition-colors hover:border-slate-600`}
           >
             <div className="flex items-start justify-between gap-4">
               {/* Left Content */}
@@ -71,30 +69,9 @@ export default function ExecutiveSummary({
                   {card.title}
                 </p>
 
-                {isArray ? (
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {card.value.length ? (
-                      card.value.map((item: string) => (
-                        <span
-                          key={item}
-                          className="rounded-full bg-blue-500/10 px-3 py-1 text-sm font-medium text-blue-400"
-                        >
-                          {item}
-                        </span>
-                      ))
-                    ) : (
-                      <span className="text-slate-500">
-                        N/A
-                      </span>
-                    )}
-                  </div>
-                ) : (
-                  <h2
-                    className={`mt-3 text-3xl font-bold ${card.color}`}
-                  >
-                    {card.value}
-                  </h2>
-                )}
+                <h2 className={`mt-3 text-3xl font-semibold ${card.color}`}>
+                  {card.value}
+                </h2>
 
                 <p className="mt-3 text-sm text-slate-500">
                   {card.subtitle}
